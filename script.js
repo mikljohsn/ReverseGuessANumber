@@ -7,10 +7,10 @@ let guess;
 function start() {
     console.log("JS is running");
 
-    document.querySelector("#start").addEventListener("click", createButtons);
+    document.querySelector("#start").addEventListener("click", startGame);
+
 
     guess = generateGuess();
-    createGuess(guess);
 }
 
 function generateGuess() {
@@ -32,9 +32,12 @@ function createGuess() {
     document.querySelector("#low").addEventListener("click", () => tooLow(guess));
     document.querySelector("#correct").addEventListener("click", () => correct(guess));
 }
+function createButtons(){
+    
+}
 
-function createButtons() {
-    document.querySelector("#start").remove(); 
+function startGame() {
+    document.querySelector("#start-text").classList.add("hide");
     createGuess(); 
 }
 
