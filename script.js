@@ -3,18 +3,19 @@
 window.addEventListener("load", start);
 
 let guess;
+let max = 100;
+let min = 1;
 
 function start() {
     console.log("JS is running");
 
     document.querySelector("#start").addEventListener("click", startGame);
-
-
+    
     guess = generateGuess();
 }
 
 function generateGuess() {
-    return Math.floor(Math.random() * 99) + 1;
+    return Math.floor(min + (max - min) / 2);
 }
 
 function createGuess() {
@@ -43,22 +44,26 @@ function startGame() {
 
 function tooLow(guess) {
     const list = document.querySelector("#guess-list");
+    list.lastElementChild.remove();
     const html = `<li>I guessed ${guess} - that was too low!</li>`;
-    list.innerHTML = html;
+    list.insertAdjacentHTML("beforeend", html);
+    min = guess+1;
     createGuess(); 
 }
 
 function tooHigh(guess) {
     const list = document.querySelector("#guess-list");
+    list.lastElementChild.remove();
     const html = `<li>I guessed ${guess} - that was too high!</li>`;
-    list.innerHTML = html;
+    list.insertAdjacentHTML("beforeend", html);
+    max = guess-1
     createGuess(); 
 }
 
 function correct(guess) {
     const list = document.querySelector("#guess-list");
     const html = `<li>I guessed ${guess} - that was correct!</li>`;
-    list.innerHTML = html; 
+    list.insertAdjacentHTML("beforeend", html);
 
     document.querySelector("#high").remove();
     document.querySelector("#low").remove();
